@@ -2,8 +2,8 @@ ECHO OFF
 CLS
 set policyStatus = FAIL
 
-ECHO WARNING! Press 1. to Enable to run scipts,
-ECHO after you finished, please press 2. to Disable script execution
+ECHO WARNING! Press 1. to Enable scipt execution,
+ECHO after you finished, please press 2. to Disable script execution.
 ECHO STATUS: Unrestricted is NOT recommended, this is unsecure!
 
 :MENU
