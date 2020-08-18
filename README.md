@@ -6,17 +6,17 @@ Tools for Windows 10. Easy way to manage your system!
 Mivel a Windows powershell ExecutionPolicy alapértelmezés szerint "Restricted", így a .ps1 fájlok végrehajátsa nem lehetséges.
 A használatához, először át kell állítanod az `ExecutionPolicy`-t "Unrestricted"-re. Majd, ha végeztél a művelettel,
 érdemes ezt visszakapcsolni az eredeti "Restricted" állapotba, hogy megelőzt a rosszindulatú kódok futtatását.
-A `menu.bat` ezen folyamat könnyebbé tételére szolgál.
+A `wintoolps.bat` ezen folyamat könnyebbé tételére szolgál.
 
 A parancssori eszköz
 ```
-menu.bat
+wintoolps.bat
 ```
 Lehetőséget kínál az "ExecutionPolicy" "Unrestricted", illetve "Restricted" módja közötti váltásra.
 Lehetőséget nyújt a `features` könyvtárban található scriptek futtatására.
 
-### Indítsd el a `menu.bat` fájlt. (Dupla klikk)
-A menu.bat az alábbi sorokkal fogad:
+### Indítsd el a `wintoolps.bat` fájlt. (Dupla klikk)
+A `wintoolps.bat` az alábbi sorokkal fogad:
 ```
 ========== ==========
        CMD MENU
@@ -33,7 +33,7 @@ STATUS: Restricted                 # Kijelzi az ExecutionPolicy aktuális státu
  - Nyomd meg az 1-es gombot, hogy engedélyezt a végrehajtást.
  - Nyomd meg a 3-as gombot, hogy elindítsd az alkalmazást.
  - Nyomd meg a 2-es gombot, hogy visszaállítsd a végrehajátési Policy-t.
- - Nyomd meg a 0-s gombot, hogy kilépj a `menu.bat`-ból.
+ - Nyomd meg a 0-s gombot, hogy kilépj a `wintoolps.bat`-ból.
 
 ## ENGLISH
 ### HOW IT WORKS
@@ -43,19 +43,19 @@ After you finished your work, put back this policy to "Restricted", for prevent 
 
 My commandline tool
 ```
-menu.bat
+wintoolps.bat
 ```
 is give an option to set ExecutionPolicy to "Unrestricted", and after you finish, you can fall back to safe Policy.
 
-### Launch `menu.bat`
-menu.bat welcome with below lines:
+### Launch `wintoolps.bat`
+wintoolps.bat welcome with below lines:
 ```
 ========== ==========
        CMD MENU
 ========== ==========
 STATUS: Restricted                 # Shpw actual status of ExecutionPolicy
 
-0 - EXIT     # Exit from menu.bat
+0 - EXIT     # Exit from wintoolps.bat
 1 - Enable Execute Scripts   # Enable Execute Scripts (Unrestricted)
 2 - Disable to Execute Scripts     # Disable Execute Unrestricted (Restricted)
 3 - Activator                      # Launch application
@@ -64,4 +64,4 @@ STATUS: Restricted                 # Shpw actual status of ExecutionPolicy
  - Press 1 to Enable Execution
  - Press 3 to Launch application
  - Press 2 to Disable Execution
- - Press 0 to Exit `menu.bat`
+ - Press 0 to Exit `wintoolps.bat`
