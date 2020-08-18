@@ -23,8 +23,8 @@ A `wintoolps.bat` az alábbi sorokkal fogad:
 ========== ==========
 STATUS: Restricted                 # Kijelzi az ExecutionPolicy aktuális státuszát
 
-0 - EXIT                    # Kilépés a programból
-1 - Enable Execute Scripts  # Kódvégrehajtás engedéjezése
+0 - EXIT                           # Kilépés a programból
+1 - Enable Execute Scripts         # Kódvégrehajtás engedéjezése
 2 - Disable to Execute Scripts     # Végrehajtás tíltása (biztonságos mód)
 3 - Activator                      # Alkalmazás indítása
 ```
