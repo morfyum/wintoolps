@@ -55,11 +55,11 @@ wintoolps.bat welcome with below lines:
 ========== ==========
 STATUS: Restricted                 # Shpw actual status of ExecutionPolicy
 
-0 - EXIT      # Exit from wintoolps.bat
-1 - Enable Execute Scripts  # Enable Execute Scripts (Unrestricted)
+0 - EXIT                           # Exit from wintoolps.bat
+1 - Enable Execute Scripts         # Enable Execute Scripts (Unrestricted)
 2 - Disable to Execute Scripts     # Disable Execute Unrestricted (Restricted)
 3 - Activator                      # Launch application
-```
+```                           
 #### STEPS:
  - Press 1 to Enable Execution
  - Press 3 to Launch application
