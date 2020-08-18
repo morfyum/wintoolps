@@ -1,5 +1,5 @@
 # wintoolps
-Tools for Windows 10. Easy way to automation activation Windows 10 for FREE without install additional software.
+Tools for Windows 10. Easy way to manage your system!
 
 ## MAGYAR
 ### HOW IT WORKS
@@ -43,7 +43,7 @@ After you finished your work, put back this policy to "Restricted", for prevent 
 
 My commandline tool
 ```
- - .bat
+menu.bat
 ```
 is give an option to set ExecutionPolicy to "Unrestricted", and after you finish, you can fall back to safe Policy.
 
@@ -55,8 +55,8 @@ menu.bat welcome with below lines:
 ========== ==========
 STATUS: Restricted                 # Shpw actual status of ExecutionPolicy
 
-0 - EXIT				# Exit from menu.bat
-1 - Enable Execute Scripts	       # Enable Execute Scripts (Unrestricted)
+0 - EXIT     # Exit from menu.bat
+1 - Enable Execute Scripts   # Enable Execute Scripts (Unrestricted)
 2 - Disable to Execute Scripts     # Disable Execute Unrestricted (Restricted)
 3 - Activator                      # Launch application
 ```
