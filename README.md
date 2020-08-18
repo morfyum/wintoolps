@@ -2,7 +2,7 @@
 Tools for Windows 10. Easy way to manage your system!
 
 ## MAGYAR
-### HOW IT WORKS
+### HOGYAN MŰKÖDIK
 Mivel a Windows powershell ExecutionPolicy alapértelmezés szerint "Restricted", így a .ps1 fájlok végrehajátsa nem lehetséges.
 A használatához, először át kell állítanod az `ExecutionPolicy`-t "Unrestricted"-re. Majd, ha végeztél a művelettel,
 érdemes ezt visszakapcsolni az eredeti "Restricted" állapotba, hogy megelőzt a rosszindulatú kódok futtatását.
