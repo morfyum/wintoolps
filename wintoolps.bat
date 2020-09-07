@@ -14,10 +14,10 @@ ECHO        CMD MENU
 ECHO ========== ==========
 ECHO STATUS: %policyStatus%
 ECHO.
-ECHO 0 - EXIT						
-ECHO 1 - Enable Execute Scripts		
-ECHO 2 - Disable to Execute Scripts	
-ECHO 3 - Activator					
+ECHO 0 - EXIT			/ 5 - Restore Health
+ECHO 1 - Enable Execute Scripts	/ 6 - Restart Network
+ECHO 2 - Disable to Execute Scripts	/ 7
+ECHO 3 - Activator			/ 8
 ECHO ========== UNSTABLE APPS ==========
 ECHO 4 - service-manager
 ECHO.
@@ -29,11 +29,8 @@ IF %M%==1 GOTO EXPOLENABLE
 IF %M%==2 GOTO EXPOLDISABLE
 IF %M%==3 GOTO ACTIVATOR
 IF %M%==4 GOTO SERVICE-MANAGER
-
-:SERVICE-MANAGER
-powershell -Command "Start-Process powershell.exe -ArgumentList 'cd %cd%\features; .\service-manager.ps1' " -Verb RunAs
-test&cls
-GOTO MENU
+IF %M%==5 GOTO RESTOREHEALTH
+IF %M%==6 GOTO RESTART-NETWORK
 
 :EXPOLENABLE
 powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force"
@@ -46,10 +43,24 @@ test&cls
 GOTO MENU
 
 :ACTIVATOR
-powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\activator.ps1' " -Verb RunAs
+powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\activator.ps1' " -Verb RunAs
 test&cls
 GOTO MENU
 
+:SERVICE-MANAGER
+powershell -Command "Start-Process powershell.exe -ArgumentList 'cd %cd%\features; .\service-manager.ps1' " -Verb RunAs
+test&cls
+GOTO MENU
+
+:RESTOREHEALTH
+powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\restoreHealth.ps1' " -Verb RunAs
+test&cls
+GOTO MENU
+
+:RESTART-NETWORK
+powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\network-restart.ps1' "
+test&cls
+GOTO MENU
 
 :NOTE
 cd %windir%\system32\notepad.exe
