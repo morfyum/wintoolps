@@ -27,32 +27,32 @@ Write-Host "This Edition: $version"
 
 
 Write-Host "*** Available Editions ***" -ForegroundColor Green
-Write-Host "Home: $vHome" 
-Write-Host "Home N: $vHomeN"
-Write-Host "Professional: $vProfessional"
-Write-Host "Professional N: $vProfessionalN"
-Write-Host "Education: $vEducation"
-Write-Host "Education N: $vEducationN"
-Write-Host "Unknown support" -ForegroundColor Yellow
-Write-Host "Home Single Language: $vHomeSingleLanguage" -ForegroundColor Yellow
+Write-Host "Home:                  $vHome"
+Write-Host "Home N:                $vHomeN"
+Write-Host "Professional:          $vProfessional"
+Write-Host "Professional N:        $vProfessionalN"
+Write-Host "Education:             $vEducation"
+Write-Host "Education N:           $vEducationN"
+Write-Host "Unknown support:" -ForegroundColor Yellow
+Write-Host "Home Single Language:  $vHomeSingleLanguage" -ForegroundColor Yellow
 Write-Host "Home Country Specific: $vHomeCountrySpecific" -ForegroundColor Yellow
-Write-Host "Enterprise: $vEnterprise" -ForegroundColor Yellow
-Write-Host "Enterprise N: $vEnterpriseN" -ForegroundColor Yellow
+Write-Host "Enterprise:            $vEnterprise" -ForegroundColor Yellow
+Write-Host "Enterprise N:          $vEnterpriseN" -ForegroundColor Yellow
 
 
 function testUsedKey {
-    if ( $usedkey = "" ) {
+	Write-Host "Test winKey..."
+    if ( $usedKey = "" ) {
         Write-Host "Unsupported Edition, Exit." -ForegroundColor Red
         exit 1
     } else {
-        Write-Host "Done : Supported Edition" 
+        Write-Host "$usedKey"
     }
 }
 
 
 function addKeyToWin {
     Write-Host "Add winKey..."
-
     Try {
         slmgr /ipk $usedkey | Out-Null
         Write-Host "Done"
@@ -90,7 +90,7 @@ function activateMachine{
 }
 
 
-Write-Host "*** Test Edition Compatibility ***"
+Write-Host "*** Test Edition Compatibility ***" -ForegroundColor Green
 switch ($version) {
     "Home"                  { "Supported"; $usedKey = $vHome }
     "Home N"                { "Supported"; $usedKey = $vHomeN }
