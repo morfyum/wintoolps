@@ -42,7 +42,7 @@ Write-Host "Enterprise N:          $vEnterpriseN" -ForegroundColor Yellow
 
 function testUsedKey {
 	Write-Host "Test winKey..."
-    if ( $usedKey = "" ) {
+    if ( $usedKey -eq "" ) {
         Write-Host "Unsupported Edition, Exit." -ForegroundColor Red
         exit 1
     } else {

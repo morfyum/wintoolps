@@ -81,7 +81,7 @@ echo "==========="
 $usedkey = ""
 
 function testUsedKey {
-    if ( $usedkey = "" ) {
+    if ( $usedkey -eq "" ) {
         echo "  usedKey is not defined! "
         exit
     } else {

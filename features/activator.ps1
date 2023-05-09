@@ -53,7 +53,7 @@ echo "==========="
 $usedkey = ""
 
 function testUsedKey {
-    if ( $usedkey = "" ) {
+    if ( $usedkey -eq "" ) {
         echo "  Something Went Wrong!"
         exit
     } else {
