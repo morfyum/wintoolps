@@ -14,12 +14,13 @@ ECHO        CMD MENU
 ECHO ========== ==========
 ECHO STATUS: %policyStatus%
 ECHO.
-ECHO 0 - EXIT			/ 5 - Restore Health
-ECHO 1 - Enable Execute Scripts	/ 6 - Restart Network
+ECHO 0 - EXIT                       / 5 - Restore Health
+ECHO 1 - Enable Execute Scripts	    / 6 - Restart Network
 ECHO 2 - Disable to Execute Scripts	/ 7
-ECHO 3 - Activator			/ 8
+ECHO 3 - Activate Windows 10        / 8
+ECHO 4 - Activate Windows 11        / 9
 ECHO ========== UNSTABLE APPS ==========
-ECHO 4 - service-manager
+ECHO 10 - service-manager
 ECHO.
 
 SET /P M=USE: 
@@ -31,6 +32,7 @@ IF %M%==3 GOTO ACTIVATOR
 IF %M%==4 GOTO SERVICE-MANAGER
 IF %M%==5 GOTO RESTOREHEALTH
 IF %M%==6 GOTO RESTART-NETWORK
+IF %M%==10 GOTO SERVICE-MANAGER
 
 :EXPOLENABLE
 powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force"
@@ -42,13 +44,13 @@ powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Res
 test&cls
 GOTO MENU
 
-:ACTIVATOR
+:W10ACTIVATOR
 powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\activator.ps1' " -Verb RunAs
 test&cls
 GOTO MENU
 
-:SERVICE-MANAGER
-powershell -Command "Start-Process powershell.exe -ArgumentList 'cd %cd%\features; .\service-manager.ps1' " -Verb RunAs
+:W11ACTIVATOR
+powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\w11-activator.ps1' " -Verb RunAs
 test&cls
 GOTO MENU
 
@@ -59,6 +61,11 @@ GOTO MENU
 
 :RESTART-NETWORK
 powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\network-restart.ps1' "
+test&cls
+GOTO MENU
+
+:SERVICE-MANAGER
+powershell -Command "Start-Process powershell.exe -ArgumentList 'cd %cd%\features; .\service-manager.ps1' " -Verb RunAs
 test&cls
 GOTO MENU
 
