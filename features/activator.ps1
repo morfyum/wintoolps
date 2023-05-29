@@ -8,6 +8,9 @@
 #	| Out-Null 
 #	-Wait
 
+$usedKey = ""
+$serverName = "kms8.msguides.com" # or kms.msguides.com
+
 $vHome = "TX9XD-98N7V-6WMQ6-BX7FG-H8Q99"
 $vHomeN = "3KHY7-WNT83-DGQKR-F7HPR-844BM"
 $vHomeSingleLanguage = "7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH"
@@ -19,177 +22,97 @@ $vEducationN = "2WH4N-8QGBV-H22JP-CT43Q-MDWWJ"
 $vEnterprise = "NPPR9-FWDCX-D2C8J-H872K-2YT43"
 $vEnterpriseN = "DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4"
 
-echo "========================"
-echo "Check Windows Version..."
-echo "========================"
-echo "Hello $env:USERNAME! "
-# Start-Process powershell -Verb runAs
-$version = Get-WindowsEdition -Online | Out-String
-$version = $version -replace "`t|`n|`r",""
+Write-Host "*** Check Windows Edition ***" -ForegroundColor Green
+Write-Host "Hello $env:USERNAME! "
+$version = (Get-WindowsEdition -Online).Edition
+Write-Host "This Edition: $version"
 
-echo ""
-echo $version
-echo ""
-
-echo "==========="
-echo "SUPPORTED SYSTEMS"
-echo "==========="
-echo "Home: $vHome"
-echo "Home N: $vHomeN"
-echo "Home Single Language: $vHomeSingleLanguage"
+Write-Host "*** Available Editions ***" -ForegroundColor Green
+echo "Home:                  $vHome"
+echo "Home N:                $vHomeN"
+echo "Home Single Language:  $vHomeSingleLanguage"
 echo "Home Country Specific: $vHomeCountrySpecific"
-echo "Professional: $vProfessional"
-echo "Professional N: $vProfessionalN"
-echo "Education: $vEducation"
-echo "Education N: $vEducationN"
-echo "Enterprise: $vEnterprise"
-echo "Enterprise N: $vEnterpriseN"
-echo ""
+echo "Professional:          $vProfessional"
+echo "Professional N:        $vProfessionalN"
+echo "Education:             $vEducation"
+echo "Education N:           $vEducationN"
+echo "Enterprise:            $vEnterprise"
+echo "Enterprise N:          $vEnterpriseN"
 
-echo "==========="
-echo "ACTIVATE..."
-echo "==========="
-
-$usedkey = ""
 
 function testUsedKey {
-    if ( $usedkey -eq "" ) {
-        echo "  Something Went Wrong!"
-        exit
-    } else {
-        echo "Test used key..."
-        echo "  OK"
+	Write-Host " - Test winKey..."
+    if ( $usedKey -eq "" ) {
+        Write-Host " : Unsupported Edition, Exit." -ForegroundColor Red
+        exit 1
     }
+    Write-Host " : $usedKey"
 }
+
 
 function addKeyToWin {
-    echo "Add key..."
-
+    Write-Host " - Add winKey..."
     Try {
         slmgr /ipk $usedkey | Out-Null
-        echo "  OK"
+        Write-Host "Done"
     }
     Catch {
-        echo "  Failed to add key... EXIT"
-        exit
+        Write-Host "Failed to add key, Exit" -ForegroundColor Red
+        exit 2
     }
 }
+
 
 function setServer {
-    echo "Set server..."
-
+    Write-Host "Setting up server..."
     Try {
-        slmgr /skms kms8.msguides.com | Out-Null
-        echo "  OK"
+        slmgr /skms $serverName | Out-Null
+        Write-Host "Done"
     }
     Catch {
-        echo "  Failed"
-        #exit
+        Write-Host "Server setup failed" -ForegroundColor Red
+        exit 3
     }
 }
+
 
 function activateMachine{
-    echo "Activate Machine..."
-    
+    Write-Host "Activate Machine..."
     Try {
         slmgr /ato | Out-Null
-        echo "  OK"
+        Write-Host "Done"
     }
     Catch {
-        echo "  Failed"
-        exit
+        Write-Host "Failed to activate" -ForegroundColor Red
+        exit 4
     }
 }
 
 
-if ( $version -eq "Edition : Home" ){
-    $usedkey = $vHome
-    echo "Home: $vHome"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Home N" ){
-    $usedkey = $vHomeN
-    echo "Home N: $vHomeN"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Home Single Language" ){
-    $usedkey = $vHomeSingleLanguage
-    echo "Home Single Language: $vHomeSingleLanguage"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Home Country Specific" ){
-    $usedkey = $vHomeCountrySpecific
-    echo "Home Country Specific: $vHomeCountrySpecific"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Professional" ){
-    $usedkey = $vProfessional
-    echo "Professional: $vProfessional"
-    #echo "usedkey:      $usedkey"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Professional N" ){
-    $usedkey = $vProfessionalN
-    echo "Professional N: $vProfessionalN"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Education" ){
-    $usedkey = $vEducation
-    echo "Education: $vEducation"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Education N" ){
-    $usedkey = $vEducationN
-    echo "Education N: $vEducationN"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Enterprise" ){
-    $usedkey = $vEnterprise
-    echo "Enterprise: $vEnterprise"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-}
-elseif ( $version -eq "Edition : Enterprise N" ){
-    $usedkey = $vEnterpriseN
-    echo "Enterprise N: $vEnterpriseN"
-    testUsedkey
-    addKeyToWin
-    setServer
-    activateMachine
-} else{
-    echo "Can't Define your system type"
-    echo "Please report it for developer"
+Write-Host "*** Test Edition Compatibility ***" -ForegroundColor Green
+switch ($version) {
+    "Home"                  { "Supported"; $usedKey = $vHome }
+    "Home N"                { "Supported"; $usedKey = $vHomeN }
+    "Home Single Language"  { "Supported"; $usedKey = $vHomeSingleLanguage }
+    "Home Country Specific" { "Supported"; $usedKey = $vHomeCountrySpecific }
+    "Professional"          { "Supported"; $usedKey = $vProfessional }
+    "Professional N"        { "Supported"; $usedKey = $vProfessionalN }    
+    "Education"             { "Supported"; $usedKey = $vEducation }
+    "Education N"           { "Supported"; $usedKey = $vEducationN }
+    "Enterprise"            { "Supported"; $usedKey = $vEnterprise }
+    "Enterprise N"          { "Supported"; $usedKey = $vEnterpriseN }
+    default {
+        Write-Host "Unknown edition: $version, Exit." -ForegroundColor Red
+        Write-Host "Please Open an issue on GitHub!" -ForegroundColor Red
+        exit 5 
+    }
 }
 
-#echo ""
-#echo "Execution policy is set: Restricted"
-#echo "This is the default setting"
-#Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Restricted -Force
 
+Write-Host "*** Activate ***" -ForegroundColor Green
+testUsedKey
+addKeyToWin
+setServer
+activateMachine
+# Finish and pause
 pause
