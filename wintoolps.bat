@@ -43,7 +43,7 @@ test&cls
 GOTO MENU
 
 :W10ACTIVATOR
-powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\activator.ps1' " -Verb RunAs
+powershell -Command "Start-Process powershell.exe -ArgumentList '%cd%\features\w10-activator.ps1' " -Verb RunAs
 test&cls
 GOTO MENU
 
